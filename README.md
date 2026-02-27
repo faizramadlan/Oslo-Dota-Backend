@@ -49,20 +49,24 @@ This is a Node.js / Express backend powering the Oslo-Dota companion site. It ha
 Endpoints cover authentication, fetching Dota 2 heroes, analytics, and external gaming memes. 
 For detailed payload and response structures, see the [api_docs.md](./api_docs.md) file.
 
-## Production Deployment (Render Blueprint)
+## Production Deployment (Koyeb)
 
-This repository includes a `render.yaml` file that automates the deployment infrastructure (Infrastructure as Code).
+This repository is optimized for deployment on [Koyeb](https://www.koyeb.com/), which offers a great free tier without requiring a credit card.
 
-1. **Connect Repository**: In the Render Dashboard, click **New +** > **Blueprint**.
-2. **Connect**: Select this GitHub repository. Render will automatically read the `render.yaml` file.
-3. **Provisioning**: It will automatically spin up two services:
-   - A PostgreSQL Database (`oslo-dota-db`)
-   - A Node Web Service (`oslo-dota-backend`)
-   - *It automatically links the `DATABASE_URL` between them!*
-4. **Environment Variables**: Once provisioned, go to the Web Service settings and input your missing secure variables:
-   - `SECRET_KEY` (Your secure production JWT secret)
-   - `VITE_APP_URL` (Your Vercel Frontend Domain, e.g., https://my-dota-app.vercel.app)
-   - *Any other API keys (Midtrans, Gmail app passwords, etc.)*
+1. **Database Setup**: 
+   - In the Koyeb Dashboard, click **Create Database** and spin up a free PostgreSQL instance.
+   - Once provisioned, copy the provided `Connection String`.
+2. **Connect Repository**: 
+   - Click **Create Service** and connect your GitHub repository.
+3. **Environment Configuration**: Expand the "Environment variables" section and add:
+   - `NODE_ENV` = `production`
+   - `DATABASE_URL` = *(Your Koyeb PostgreSQL Connection String)*
+   - `VITE_APP_URL` = *(Your Vercel Frontend Domain, e.g., https://my-dota-app.vercel.app)*
+   - `SECRET_KEY` = *(Your secure production JWT secret)*
+4. **Build & Start**: 
+   - Set the Run Command to: `npm run koyeb-prestart && npm run koyeb-start`
+   - *This ensures database migrations forcefully target the production PostgreSQL instance before booting your Express app.*
+5. **Deploy**: Click Deploy and Koyeb will build and launch your API!
 
 ---
 *Maintained using `@kaizen` continuous improvement principles, featuring decoupled service layers and uniform `AppError` handling patterns.*

@@ -22,15 +22,14 @@ services:
         sync: false
       - key: VITE_APP_URL
         sync: false
-      - key: email_address
-        sync: false
-      - key: email_password
-        sync: false
+      # - key: email_address
+      #   sync: false
+      # - key: email_password
+      #   sync: false
 
 databases:
   # Managed PostgreSQL Database
   - name: oslo-dota-db
     databaseName: iproject
-    user: postgres
     plan: free
     region: oregon

@@ -1,10 +1,16 @@
 {
   "development": {
-    "username": "postgres",
-    "password": "postgres",
-    "database": "iproject",
-    "host": "localhost",
-    "dialect": "postgres"
+    "username": "koyeb-adm",
+    "password": "npg_QBzb4hqR6Exj",
+    "database": "koyebdb",
+    "host": "ep-broad-butterfly-agvoz7kp.c-2.eu-central-1.pg.koyeb.app",
+    "dialect": "postgres",
+    "dialectOptions": {
+      "ssl": {
+        "require": true,
+        "rejectUnauthorized": false
+      }
+    }
   },
   "test": {
     "username": "root",
