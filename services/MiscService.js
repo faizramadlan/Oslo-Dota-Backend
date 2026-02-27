@@ -26,7 +26,7 @@ class MiscService {
 
     try {
       let { data } = await axios({
-        url: 'https://www.cheapshark.com/api/1.0/deals?storeID=1&upperPrice=15',
+        url: 'https://www.cheapshark.com/api/1.0/deals?upperPrice=0',
         method: 'get',
       });
       
