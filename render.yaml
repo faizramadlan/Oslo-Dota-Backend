@@ -1,0 +1,36 @@
+previews:
+  generation: automatic
+  
+services:
+  # The Node.js Express Application
+  - type: web
+    name: oslo-dota-backend
+    env: node
+    plan: free
+    region: oregon # or specify your preferred region
+    buildCommand: npm install
+    startCommand: npm start # This runs 'node app.js' + the 'prestart' migration we added
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        fromDatabase:
+          name: oslo-dota-db
+          property: connectionString
+      # Add placeholders for keys you must set securely in the Render Dashboard
+      - key: SECRET_KEY
+        sync: false
+      - key: VITE_APP_URL
+        sync: false
+      - key: email_address
+        sync: false
+      - key: email_password
+        sync: false
+
+databases:
+  # Managed PostgreSQL Database
+  - name: oslo-dota-db
+    databaseName: iproject
+    user: postgres
+    plan: free
+    region: oregon
